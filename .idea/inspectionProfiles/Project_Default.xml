@@ -15,6 +15,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="terminal_blog.app.database" />
+          <option value="src.models.user.blog" />
         </list>
       </option>
     </inspection_tool>

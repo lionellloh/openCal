@@ -1,5 +1,8 @@
 # Something that allows our user to login and register
+from flask import Flask, session
 from src.common.database import Database
+from blog import Blog
+import datetime
 
 class User(object):
     def __init__(email, password):
@@ -56,7 +59,27 @@ class User(object):
 
 
     def get_blogs(self):
-        
+        return Blog.find_by_author_id(self._id)
+
+    def new_blog(self, title, description):
+    #     We need author, title, description, author_id
+    # We do not have any duplication check now
+        blog = Blog(author = self.email,
+                    title = title,
+                    description = description,
+                    author_id = self._id)
+
+        blog.save_to_mongo()
+
+    @staticmethod
+    def new_post(blog_id, title, content, date = datetime.datetime.utcnow()):
+        # Blog_id is derived from the website
+        blog = Blog.from_mongo(blog_id)
+        blog.new_post(title = title,
+                      content = content,
+                      created_date = date)
+
+
 
     # Json output will only be done inside the app
     def json(self):
