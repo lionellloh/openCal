@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Hello, please login.</h1>
+    <h1> Register here </h1>
+    <div class = "container page-form">
 
-<div class = "container page-form">
-
-    <form id="login-form" action="/auth/login" method="post">
+    <form id="login-form" action="/auth/register" method="post">
 
         <div class ="form-group">
             <label for = "email"> Email </label>
@@ -19,10 +18,9 @@
 
         </div>
 
-        <button type = "submit" class = "btn btn-success"> Submit </button>
+        <button type = "submit" class = "btn btn-info"> Submit </button>
 
     </form>
 
-</div>
-
+    </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 import uuid
 from models.post import Post
 import datetime
-from database import Database
+from src.common.database import Database
 
 class Blog(object):
 
@@ -50,4 +50,4 @@ class Blog(object):
     def find_by_author_id(cls, author_id):
         blogs = Database.find(collection = "blogs",
                               query = {'author_id' : author_id})
-        return [(cls(**blog) for blog in blogs]
+        return [cls(**blog) for blog in blogs]

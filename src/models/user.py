@@ -1,13 +1,15 @@
 # Something that allows our user to login and register
 from flask import Flask, session
 from src.common.database import Database
-from blog import Blog
+from src.models.blog import Blog
 import datetime
+import uuid
 
 class User(object):
-    def __init__(email, password):
+    def __init__(self,_id, email, password):
         self.email = email
         self.password = password
+        self._id = uuid.uuid4().hex if _id is None else _id
 
 
 
@@ -15,14 +17,14 @@ class User(object):
     @classmethod
     def get_by_email(cls, email):
         data = Database.find_one("users", {"email": email})
-
+        print(data)
         if data is not None:
             return cls(**data)
 
     @classmethod
     def get_by_id(cls, _id):
         data = Database.find_one("users", {"_id": _id})
-        if data is not None
+        if data is not None:
             return cls(**data)
 
 
@@ -38,7 +40,7 @@ class User(object):
     def register(cls, email, password):
         user = cls.get_by_email(email)
         if user is None:
-            new_user = cls(email, password)
+            new_user = cls(None, email, password)
             new_user.save_to_mongo()
             session['email'] = email
             return True
