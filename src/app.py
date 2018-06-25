@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session
-from src.models.user import User
-from src.common.database import Database
+from models.user import User
+from common.database import Database
 
 app = Flask(__name__)
 

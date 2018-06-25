@@ -1,7 +1,7 @@
 # Something that allows our user to login and register
 from flask import Flask, session
-from src.common.database import Database
-from src.models.blog import Blog
+from common.database import Database
+from .blog import Blog
 import datetime
 import uuid
 
